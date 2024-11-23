@@ -76,21 +76,17 @@
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-    <div>
-        
-        <svg viewBox="0 0 1000 1000" id="figure1"></svg>
-        <svg viewBox="0 0 1000 1000" id="figure2"></svg>
-    </div>
-    <div>
-       
-        <div class="list-container">
-            <h3>Selected Cars</h3>
-            <ul id="selected-list"></ul>
-        </div>
-    </div>
-    <script>
- 
-        d3.csv("./data/car_sample_data.csv").then(data => {
+<div>
+    <svg viewBox="0 0 1000 1000" id="figure1"></svg>
+    <svg viewBox="0 0 1000 1000" id="figure2"></svg>
+</div>
+<div>
+    <ul id="selected-list"></ul>
+</div>
+
+<script>
+    d3.csv("./data/car_sample_data.csv")
+        .then(data => {
             scatter_plot(
                 data = data,
                 "#figure1",
@@ -114,7 +110,27 @@
                 colorCol = "Country",
                 margin = 150
             );
+
+            document.addEventListener("mousemove", event => {
+                const listBox = d3.select(`#selected-list`);
+
+                const selectedPoints = Array.from(document.querySelectorAll(".selected"));
+                const ids = [...new Set(selectedPoints.map(d => +d.id.split(" ")[0].slice(3)))];
+
+                listBox.selectAll("li").remove();
+
+                if (ids.length > 0) {
+                    listBox.selectAll(".listVals")
+                        .data(ids)
+                        .enter()
+                        .append("li")
+                        .text(d => {
+                            const point = data[d];
+                            return `${point.Model} - ${point.Type}`; // Using the 'Type' column dynamically
+                        });
+                }
+            });
         });
-    </script>
+</script>
 </body>
 </html>
