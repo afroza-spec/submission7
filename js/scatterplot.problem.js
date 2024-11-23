@@ -79,11 +79,7 @@ function scatter_plot(data, ax, title = "", xCol = "", yCol = "", rCol = "", leg
     Fig.call(brush);
 
     function brushStart() {
-        const selection = d3.brushSelection(this);
-        // Check if selection is not null
-        if (!selection || (selection[0][0] === selection[1][0] && selection[0][1] === selection[1][1])) {
-            d3.selectAll("circle").classed("selected", false);
-        }
+        d3.selectAll("circle").classed("selected", false);
     }
 
     function brushed({ selection }) {
@@ -99,7 +95,7 @@ function scatter_plot(data, ax, title = "", xCol = "", yCol = "", rCol = "", leg
             const x = xScale(d[xCol]);
             const y = yScale(d[yCol]);
             return (
-                selectedCategories.has(d[colorCol]) &&
+                selectedCategories.has(d[colorCol]) && // Only include points in selected categories
                 x >= x0 && x <= x1 &&
                 y >= y0 && y <= y1
             );
@@ -118,9 +114,9 @@ function scatter_plot(data, ax, title = "", xCol = "", yCol = "", rCol = "", leg
             .enter()
             .append("li")
             .attr("class", "listVals")
-            .text(d => `${d["Model"]} (${d["Country"]}) - MPG: ${d["MPG"]}, Price: $${d["Price"]}`);
+            .text(d => `${d["Model"]} - ${d["Type"]}`);
     }
-
+    
     const legendContainer = Fig.append("g")
         .attr("transform", `translate(${800},${margin})`)
         .attr("class", "marginContainer");
@@ -163,14 +159,16 @@ function scatter_plot(data, ax, title = "", xCol = "", yCol = "", rCol = "", leg
             updateVisibility();
         });
 
-    function updateVisibility() {
-        d3.selectAll("circle")
-            .style("opacity", d => selectedCategories.has(d[colorCol]) ? 1 : 0.2);
-
-        legends_items.selectAll("rect")
-            .style("opacity", d => selectedCategories.has(d) ? 1 : 0.2);
-
-        legends_items.selectAll("text")
-            .style("opacity", d => selectedCategories.has(d) ? 1 : 0.2);
-    }
-}
+        function updateVisibility() {
+            // Update circle visibility
+            d3.selectAll("circle")
+                .style("opacity", d => selectedCategories.has(d[colorCol]) ? 1 : 0.2);
+        
+            // Update legend opacity across ALL graphs
+            d3.selectAll("rect")
+                .style("opacity", d => selectedCategories.has(d) ? 1 : 0.2);
+        
+            d3.selectAll(".legend")
+                .style("opacity", d => selectedCategories.has(d) ? 1 : 0.2);
+        }
+    }        
