@@ -90,13 +90,11 @@
     </div>
     <script>
     
-        d3.csv("data/car_sample_data.csv")
+       d3.csv("data/car_sample_data.csv")
     .then(data => {
-        console.log("Loaded data:", data); // Inspect the data structure
-        scatter_plot(data, "#figure1", "MPG vs Price", "Price", "MPG", "Weight", [], "Country", 150);
-        scatter_plot(data, "#figure2", "MPG vs Engine Size", "EngineSizeCI", "MPG", "Weight", [], "Country", 150);
+        console.log("Loaded data:", data); // Inspect the structure in the console
     })
-    .catch(error => console.error("Error loading data:", error));
+    .catch(error => console.error("Error loading CSV:", error));
 
 
             scatter_plot(
