@@ -77,19 +77,19 @@
 </head>
 <body>
     <div>
-        <!-- Missing Part 1: Add unique IDs to the SVG elements -->
+        
         <svg viewBox="0 0 1000 1000" id="figure1"></svg>
         <svg viewBox="0 0 1000 1000" id="figure2"></svg>
     </div>
     <div>
-        <!-- Missing Part 2: Add a container and list for selected items -->
+       
         <div class="list-container">
             <h3>Selected Cars</h3>
             <ul id="selected-list"></ul>
         </div>
     </div>
     <script>
-        // Missing Part 3: Load CSV and initialize scatter plots
+ 
         d3.csv("./data/car_sample_data.csv").then(data => {
             scatter_plot(
                 data = data,
