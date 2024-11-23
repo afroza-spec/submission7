@@ -87,12 +87,12 @@
         </div>
     </div>
     <script>
-        // Load the CSV file
+        
         d3.csv("data/car_sample_data.csv")
             .then(data => {
-                console.log("Loaded data:", data); // Inspect the structure in the console
+                console.log("Loaded data:", data); 
 
-                // Render scatter plot for the first SVG
+         
                 scatter_plot(
                     data,
                     "#figure1",
@@ -105,7 +105,7 @@
                     150
                 );
 
-                // Render scatter plot for the second SVG
+     
                 scatter_plot(
                     data,
                     "#figure2",
