@@ -89,35 +89,38 @@
     <script>
         // Load the CSV file
         d3.csv("data/car_sample_data.csv")
-    .then(data => {
-        console.log("Loaded data:", data); // Inspect the structure in the console
+            .then(data => {
+                console.log("Loaded data:", data); // Inspect the structure in the console
 
-        // Render scatter plot for the first SVG
-        scatter_plot(
-            data,
-            "#figure1",
-            "MPG vs Price",
-            "Price",
-            "MPG",
-            "Weight",
-            [],
-            "Country",
-            150
-        );
+                // Render scatter plot for the first SVG
+                scatter_plot(
+                    data,
+                    "#figure1",
+                    "MPG vs Price",
+                    "Price",
+                    "MPG",
+                    "Weight",
+                    [],
+                    "Country",
+                    150
+                );
 
-        // Render scatter plot for the second SVG
-        scatter_plot(
-            data,
-            "#figure2",
-            "MPG vs Engine Size",
-            "EngineSizeCI",
-            "MPG",
-            "Weight",
-            [],
-            "Country",
-            150
-        );
-    })
-    .catch(error => {
-        console.error("Error loading CSV file:", error);
-    }); // Close the full d3.csv block properly
+                // Render scatter plot for the second SVG
+                scatter_plot(
+                    data,
+                    "#figure2",
+                    "MPG vs Engine Size",
+                    "EngineSizeCI",
+                    "MPG",
+                    "Weight",
+                    [],
+                    "Country",
+                    150
+                );
+            })
+            .catch(error => {
+                console.error("Error loading CSV file:", error);
+            });
+    </script>
+</body>
+</html>
