@@ -77,39 +77,50 @@
 </head>
 <body>
     <div>
-       
         <svg viewBox="0 0 1000 1000" id="figure1"></svg>
         <svg viewBox="0 0 1000 1000" id="figure2"></svg>
     </div>
     <div>
-    
         <div class="list-container">
             <h3>Selected Cars</h3>
             <ul id="selected-list"></ul>
         </div>
     </div>
     <script>
-    
-       d3.csv("data/car_sample_data.csv")
-    .then(data => {
-        console.log("Loaded data:", data); // Inspect the structure in the console
-    )
-    .catch(error => console.error("Error loading CSV:", error));
+        // Load the CSV file
+        d3.csv("data/car_sample_data.csv")
+            .then(data => {
+                console.log("Loaded data:", data); // Debugging: Inspect loaded data
+                
+                // Render scatter plot for the first SVG
+                scatter_plot(
+                    data,
+                    "#figure1",
+                    "MPG vs Price",
+                    "Price",
+                    "MPG",
+                    "Weight",
+                    [],
+                    "Country",
+                    150
+                );
 
-
-            scatter_plot(
-                data = data,
-                "#figure2",
-                title = "MPG vs Engine Size",
-                xCol = "EngineSizeCI",
-                yCol = "MPG",
-                rCol = "Weight",
-                legend = [],
-                colorCol = "Country",
-                margin = 150
-            );
-        });
+                // Render scatter plot for the second SVG
+                scatter_plot(
+                    data,
+                    "#figure2",
+                    "MPG vs Engine Size",
+                    "EngineSizeCI",
+                    "MPG",
+                    "Weight",
+                    [],
+                    "Country",
+                    150
+                );
+            })
+            .catch(error => {
+                console.error("Error loading CSV file:", error);
+            });
     </script>
 </body>
 </html>
-
