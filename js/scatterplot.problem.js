@@ -80,8 +80,8 @@ function scatter_plot(data, ax, title = "", xCol = "", yCol = "", rCol = "", leg
 
     function brushStart() {
         const selection = d3.brushSelection(this);
-        // Check if selection exists before accessing its properties
-        if (!selection || selection[0][0] === selection[1][0]) {
+        // Check if selection is not null
+        if (!selection || (selection[0][0] === selection[1][0] && selection[0][1] === selection[1][1])) {
             d3.selectAll("circle").classed("selected", false);
         }
     }
